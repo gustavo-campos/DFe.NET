@@ -584,6 +584,7 @@ namespace NFe.Classes.Informacoes.Identificacao.Tipos
     ///     <para>3 - Retorno por recusa na entrega ou por não localização do destinatário na tentativa de entrega</para>
     ///     <para>4 - Redução de valores</para>
     ///     <para>5 - Transferência de crédito na sucessão</para>
+    ///     <para>6 - Retorno por recusa parcial na entrega</para>
     /// </summary>
     public enum TpNotaCredito
     {
@@ -618,9 +619,16 @@ namespace NFe.Classes.Informacoes.Identificacao.Tipos
         /// <summary>
         /// 05 - Transferência de crédito na sucessão
         /// </summary>
-        [Description("Transferência de crédito na sucessão;")]
+        [Description("Transferência de crédito na sucessão")]
         [XmlEnum("05")]
-        TfCreditoSucessao
+        TfCreditoSucessao,
+
+        /// <summary>
+        /// 06 - Retorno por recusa parcial na entrega
+        /// </summary>
+        [Description("Retorno por recusa parcial na entrega")]
+        [XmlEnum("06")]
+        RetornoPorRecusaParcialNaEntrega
     }
 
     /// <summary>
