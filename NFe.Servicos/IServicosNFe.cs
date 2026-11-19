@@ -194,7 +194,7 @@ namespace NFe.Servicos
         /// </summary>
         RetornoRecepcaoEvento RecepcaoEventoSolicitacaoDeApropriacaoDeCreditoPresumido(int idLote,
             int sequenciaEvento, string cpfCnpj, TipoAutor tipoAutor, string chaveNFe,
-            List<gCredPres> informacoesDeCreditoPresumidoPorItem,
+            List<gCredPresOper> informacoesDeCreditoPresumidoPorItem,
             Estado? ufAutor = null, string versaoAplicativo = null, DateTimeOffset? dataHoraEvento = null);
 
         /// <summary>
