@@ -70,5 +70,20 @@ namespace NFe.Classes.Informacoes.Detalhe.Tributacao.Compartilhado.InformacoesIb
             get => _vCredPresCondSus.Arredondar(2);
             set => _vCredPresCondSus = value.Arredondar(2);
         }
+
+        /// <summary>
+        ///     cCredPres não existe em TCredPres no leiaute atual (o código fica em gCredPresOper/cCredPres).
+        ///     Só é serializado quando informado (compatibilidade com quem ainda preenche o campo).
+        /// </summary>
+        public bool ShouldSerializecCredPres() => cCredPres != 0;
+
+        /// <summary>
+        ///     TCredPres tem choice entre vCredPres e vCredPresCondSus: vCredPresCondSus é emitido quando
+        ///     diferente de zero e, nesse caso, vCredPres é omitido.
+        /// </summary>
+        public bool ShouldSerializevCredPres() => vCredPresCondSus == 0;
+
+        /// <inheritdoc cref="ShouldSerializevCredPres"/>
+        public bool ShouldSerializevCredPresCondSus() => vCredPresCondSus != 0;
     }
 }

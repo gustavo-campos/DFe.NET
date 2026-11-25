@@ -392,6 +392,43 @@ namespace DFe.Testes.Impostos
 
         #endregion
 
+        [TestMethod]
+        public void DadoGCredPresOperComVCredPresQuandoSerializarEntaoNaoDeveGerarCCredPresNemVCredPresCondSusNosSubgrupos()
+        {
+            /** 1) Preparação **/
+            var credPres = new gCredPresOper
+            {
+                vBCCredPres = 100m,
+                cCredPres = "01",
+                gIBSCredPres = new gIBSCredPres { pCredPres = 1.5m, vCredPres = 1.5m },
+                gCBSCredPres = new gCBSCredPres { pCredPres = 0.9m, vCredPres = 0.9m },
+            };
+
+            /** 2) Execução **/
+            var xml = FuncoesXml.ClasseParaXmlString(credPres);
+
+            /** 3) Verificação **/
+            // cCredPres só pode aparecer uma vez: no próprio gCredPresOper (TCredPres não tem o campo).
+            Assert.AreEqual(1, xml.Split(new[] { "<cCredPres>" }, StringSplitOptions.None).Length - 1, xml);
+            StringAssert.Contains(xml, "<vCredPres>1.50</vCredPres>");
+            Assert.IsFalse(xml.Contains("vCredPresCondSus"), xml);
+        }
+
+        [TestMethod]
+        public void DadoGCredPresComVCredPresCondSusQuandoSerializarEntaoDeveGerarSomenteVCredPresCondSus()
+        {
+            /** 1) Preparação **/
+            var credPres = new gIBSCredPres { pCredPres = 2m, vCredPresCondSus = 3m };
+
+            /** 2) Execução **/
+            var xml = FuncoesXml.ClasseParaXmlString(credPres);
+
+            /** 3) Verificação **/
+            StringAssert.Contains(xml, "<vCredPresCondSus>3.00</vCredPresCondSus>");
+            Assert.IsFalse(xml.Contains("<vCredPres>"), xml);
+            Assert.IsFalse(xml.Contains("<cCredPres>"), xml);
+        }
+
         private static List<string> ValidarNoXsd(string xml, string arquivoXsd)
         {
             var erros = new List<string>();
