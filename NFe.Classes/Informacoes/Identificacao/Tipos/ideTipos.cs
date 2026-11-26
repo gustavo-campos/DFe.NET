@@ -532,6 +532,7 @@ namespace NFe.Classes.Informacoes.Identificacao.Tipos
     ///     <para>5 - Transferência de crédito de sucessão</para>
     ///     <para>6 - Pagamento antecipado</para>
     ///     <para>7 - Perda em estoque</para>
+    ///     <para>8 - Desenquadramento do Simples Nacional</para>
     /// </summary>
     public enum TpNotaDebito
     {
@@ -582,7 +583,14 @@ namespace NFe.Classes.Informacoes.Identificacao.Tipos
         /// </summary>
         [Description("Perda em estoque")]
         [XmlEnum("07")]
-        PerdaEstoque
+        PerdaEstoque,
+        
+        /// <summary>
+        /// 08 - Desenquadramento do Simples Nacional
+        /// </summary>
+        [Description("Desenquadramento do Simples Nacional")]
+        [XmlEnum("08")]
+        DesenquadramentoSimplesNacional
     }
 
     /// <summary>
